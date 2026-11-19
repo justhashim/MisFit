@@ -28,5 +28,5 @@ You also need a MySQL server on `localhost:3306` with a database named `misfit` 
 
 ## Notes
 
-Hackathon project, built in 24 hours (Hackathon 2022) with [HariCodesHere](https://github.com/HariCodesHere).
+Finalist at the Dr. Pradeep P. Thevannoor Hackathon (2022). Built in 24 hours with [HariCodesHere](https://github.com/HariCodesHere).
 The base is a quiz-site template, so the quiz pages (take quiz, ask question, contact) are leftovers and do nothing for the dog-safety idea. A navigation bar on the survey page links to an SOS page that was never built.
