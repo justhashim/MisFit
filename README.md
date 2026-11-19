@@ -1,62 +1,32 @@
-# MisFIt - Hackathon 2022 Project  
+# MisFit
 
-MisFIt is an innovative application developed during the **Hackathon 2022**. It addresses the increasing concerns about stray dog attacks and provides a comprehensive safety system. The project was built under intense competition within a 24-hour timeframe, showcasing teamwork, innovation, and technical expertise.
+Stray Dogs Attack Prevention System. Residents report dog trouble by pin code, and the app turns the answers into a red, yellow or green zone.
 
-## 🌟 Key Features  
+## What it does
 
-1. **Emergency SOS:**  
-   - Instantly send alerts to local authorities and nearby users during emergencies.  
-   - Real-time notifications ensure prompt action.  
+- Register and log in as a Public user or a Department user.
+- Fill in a survey: pin code, district, how often dogs are a problem, how many dogs you saw this week, and whether you were bitten.
+- Look up a pin code on the Heat Map page to get its zone.
 
-2. **Danger Area Mapping:**  
-   - Displays real-time maps indicating areas with high stray dog activity.  
-   - Allows users to avoid dangerous zones, ensuring safe routes.  
+## How it works
 
-3. **User Report System:**  
-   - Collects and manages reports from users about stray dog sightings and incidents.  
-   - Centralized MySQL database to store and analyze the reports.  
+Each survey answer is stored in a MySQL `survey` table with the user, pin code and a timestamp. For a pin code, the app adds up the "dogs seen this week" answers, divides by the number of responses and maps the average to a zone: above 2.75 is Red, above 1.75 is Yellow, below that is Green (`checkHeatmap.jsp`, `HeatmapProcess.jsp`).
 
-## 🛠️ Technology Stack  
+The heat map is a zone label per pin code. There is no map drawing.
 
-- **Backend:** Java  
-- **Frontend:** HTML, CSS, JavaScript  
-- **Database:** MySQL  
-- **Other Tools:** JSP  
+## Stack
 
-## 🚀 How It Works  
+- Java, JSP, servlet listener (Eclipse dynamic web project)
+- MySQL via JDBC (`mysql-connector-j` is bundled in `WEB-INF/lib`)
+- HTML, CSS
 
-1. **Emergency SOS:** Users can press a panic button to send immediate alerts. The alert includes location data, ensuring accurate response.  
-2. **Real-Time Mapping:** Integrated mapping system marks high-risk areas based on user reports and past incidents.  
-3. **Reporting System:** Users can report sightings or incidents, contributing to a dynamic database that helps keep the community informed.  
+## Run it locally
 
-## 💡 Inspiration  
+Roughly: import the project into Eclipse (or any IDE with a servlet container), deploy it on Tomcat and open `index.jsp`.
 
-Stray dog attacks have become a significant concern in many urban and rural areas. MisFIt aims to address this issue by creating a networked safety system that not only responds to emergencies but also proactively prevents them through awareness and informed navigation.
+You also need a MySQL server on `localhost:3306` with a database named `misfit` and `login` and `survey` tables. The database credentials are hardcoded in the JSPs and `MyListener.java`, and no schema script for these two tables exists in the repo. Expect to set them up by hand.
 
-## 🤝 Collaboration  
+## Notes
 
-MisFIt was built by a dedicated team of developers during Hackathon 2022. The project combined diverse skills, creative problem-solving, and effective collaboration to develop a functional prototype in record time.
-
-## 📈 Impact  
-
-- Improved community safety by reducing stray dog attack incidents.  
-- Enhanced awareness of high-risk areas through real-time mapping.  
-- Empowered users with a tool for reporting and handling emergencies effectively.  
-
-## 💻 Future Scope  
-
-- Integration with government and animal welfare agencies for better response management.  
-- Expansion to cover other safety-related concerns such as hazardous zones or crime-prone areas.  
-- Addition of machine learning to predict potential risk zones based on historical data.
-
----
-
-## 🏆 Achievements  
-
-- **Hackathon Finalist 2022:** MisFIt stood out among competing projects, earning recognition for its innovative approach and real-world impact.  
-
-## ✨ How to Run the Project  
-
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/HashimCodeDev/MisFIt.git
+Hackathon project, built in 24 hours (Hackathon 2022) with [HariCodesHere](https://github.com/HariCodesHere).
+The base is a quiz-site template, so the quiz pages (take quiz, ask question, contact) are leftovers and do nothing for the dog-safety idea. A navigation bar on the survey page links to an SOS page that was never built.
